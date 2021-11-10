@@ -63,11 +63,14 @@ int main()
 
     if (index == CAPACITY)
     {
-        std::cout << "Doesn't contain number!" << std::endl;
+        //std::cout << "Doesn't contain number!" << std::endl;
     }
     else
     {
-        std::cout << "The array contains number at index " << index << std::endl;
+        //std::cout << "The array contains number at index " << index << std::endl;
     }
     return 0;
+
+    //Why declare parameters to be const?
+    //Don't want to mess with something when we run an incorrect statement.
 }
