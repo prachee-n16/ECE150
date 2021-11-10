@@ -54,22 +54,53 @@ std::size_t find_v2(double const array[], std::size_t const capacity, double con
     return capacity;
 }
 
+//Sorting an array
+//Each entry is greater than or equal to all previous entries is a sorted array
+bool is_sorted_v1(double const array[], std::size_t const capacity);
+bool is_sorted_v1(double const array[], std::size_t const capacity)
+{
+    //When comparing entries, you are comparing
+    //array[0] <= array[1] ... array[8] < array[9] for array of 10 elements
+
+    for (std::size_t k{0}; k < capacity - 1; ++k)
+    {
+        //check if next entry is greater then previous entry
+        if (array[k] > array[k + 1])
+        {
+            return false;
+        }
+        //when we have checked all pairs
+    }
+    return true;
+
+    //How useful is the response?
+    //Know where the out of entry is probably.
+}
+
+std::size_t is_sorted_v2(double const array[], std::size_t const capacity);
+std::size_t is_sorted_v2(double const array[], std::size_t const capacity)
+{
+    for (std::size_t k{0}; k < capacity - 1; ++k)
+    {
+        if (array[k] > array[k + 1])
+        {
+            return k + 1;
+        }
+    }
+    return capacity;
+
+    //Introducing errors
+    //Imagine for loop said k < capacity. Then, the following comparision:
+    //array[capacity - 1] > array [capacity]
+    //Gives wrong answer cause when it looks at next address, it blindly takes that value
+}
+
 int main()
 {
     const std::size_t CAPACITY{10};
     double data[CAPACITY]{1, 2, 3, 4, 5, 6, 7, 8, 100, 0};
 
     std::size_t index{find_v2(data, CAPACITY, 100.0)};
-
-    if (index == CAPACITY)
-    {
-        //std::cout << "Doesn't contain number!" << std::endl;
-    }
-    else
-    {
-        //std::cout << "The array contains number at index " << index << std::endl;
-    }
-    return 0;
 
     //Why declare parameters to be const?
     //Don't want to mess with something when we run an incorrect statement.
