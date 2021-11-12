@@ -95,6 +95,9 @@ std::size_t is_sorted_v2(double const array[], std::size_t const capacity)
     //Gives wrong answer cause when it looks at next address, it blindly takes that value
 }
 
+//Searching sorted arrays
+//Begin by checking if array is sorted or not?
+
 int main()
 {
     const std::size_t CAPACITY{10};
