@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <cmath>
 //Introduction to Classes
 //Basic definition: Classes aggregate (combine elements) and protect data
 
@@ -60,7 +60,7 @@ double inner_product(Vector_3d const &u, Vector_3d const &v)
 }
 double norm(Vector_3d const &u)
 {
-    return std::sqrt(inner_product(u, u))
+    return std::sqrt(inner_product(u, u));
 }
 
 //Array class
@@ -73,7 +73,7 @@ double norm(Vector_3d const &u)
 //Instead consider this
 class Pair;
 //function that returns a pair object
-Pair maxmin(Array const &array);
+//Pair maxmin(Array const &array);
 //returns first and second value (RETURN TWO VALUES)
 class Pair
 {
@@ -82,6 +82,74 @@ public:
     std::size_t second_;
 };
 //declare function here
+
+//4.4 Operator overloading
+//Let's say you have a class Rational
+//When you add p+q where p and q are objects of class
+//you have to say add(p+q) and then convert that to a string
+//what if you could easily say p+q
+class Rational
+{
+public:
+    int numer_;
+    int denom_;
+};
+//Operator overloading
+Rational operator+(Rational const &p, Rational const &q);
+Rational operator+(Rational const &p, Rational const &q)
+{
+    //return p+q being added together
+    return p;
+}
+//Now when you add two objects, you can define it for them
+//Can overload anything but :: or .
+
+//Can be done for all previous functions but remember
+//It does not know anything about commutavity or symmetry
+//Dont have double meaning for an operator and make sure it makes sense
+
+//4.5 Issues with member variables
+//Issue with a rational class is you can't have x/0
+//Could ensure by using assert
+//assert ( (p.denom_ !=0.0) && (q.denom_ != 0.0))
+//expensive for checks.
+//Create a normal form then
+//Doesnt work though
+
+//SOLUTION: Deal with the lifetime of an object
+//Constructors deal with object initialization
+//Member functions access and manipulate
+//Destructors will deal with clean up of the objects
+
+//Known as encapsulation: protects information from the user
+
+//4.6 Using member functions
+//users should only be able to call functions associated with
+//the class
+//like member variables you have member functions
+//std::cout.precision(16)
+//classname.function()
+//We didn’t have to deal with the constructors or the destructors
+///because the compiler deal with these:
+//– The constructor was called when the local variable was declared
+//– The destructor was called when the local variable went out of scope
+
+//4.7 Throw and catch exceptions
+//throw std::some_error {
+//code
+//} else {}
+
+//need to catch them so program continues executing
+//try {}
+//catch (...)
+//multiple catches (cascading catch blocks)
+//exceptions are expensive
+
+//4.08 Classes, encapsulation and constructors
+//you can have private variables
+//private:
+//int something?
+//at the same time keep public variables
 
 int main();
 int main()
