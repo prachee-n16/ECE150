@@ -20,6 +20,23 @@ Transaction::Transaction(std::string ticker_symbol, unsigned int day_date,
                          bool buy_sell_trans, unsigned int number_shares,
                          double trans_amount)
 {
+  this->symbol = ticker_symbol;
+  this->day = day_date;
+  this->month = month_date;
+  this->year = year_date;
+  this->shares = number_shares;
+  this->amount = trans_amount;
+
+  if (buy_sell_trans == true)
+  {
+    this->trans_type = "Buy";
+  }
+  else if (buy_sell_trans == false)
+  {
+    this->trans_type = "Sell";
+  }
+  this->trans_id = assigned_trans_id;
+  assigned_trans_id++;
 }
 // Destructor
 // TASK 1
@@ -33,6 +50,19 @@ Transaction::~Transaction()
 //Tested in third submission
 bool Transaction::operator<(Transaction const &other)
 {
+  //2010 < 2021 return true
+  if (this->year < other.year)
+  {
+    return true;
+  }
+  else if (this->year == other.year && this->month < other.month)
+  {
+    return true;
+  }
+  else if (this->year == other.year && this->month == other.month && this->day < other.day)
+  {
+    return true;
+  }
   return false;
 }
 
