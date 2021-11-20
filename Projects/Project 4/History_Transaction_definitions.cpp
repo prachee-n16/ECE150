@@ -38,16 +38,15 @@ Transaction::Transaction(std::string ticker_symbol, unsigned int day_date,
   this->trans_id = assigned_trans_id;
   assigned_trans_id++;
 }
+
 // Destructor
 // TASK 1
-//Tested in second submission
 Transaction::~Transaction()
 {
 }
 
 // Overloaded < operator.
 // TASK 2
-//Tested in third submission
 bool Transaction::operator<(Transaction const &other)
 {
   //2010 < 2021 return true
@@ -129,23 +128,26 @@ void Transaction::print()
 
 // Constructor
 // TASK 3
-//
-History::History() {}
+//Testing this function
+History::History()
+{
+  p_head = nullptr;
+}
 // Destructor
 // TASK 3
-//
+//Testing this function
 History::~History() {}
 
 // read_history(...): Read the transaction history from file.
 // TASK 4
-//
+//Testing this function
 void History::read_history()
 {
 }
 
 // insert(...): Insert transaction into linked list.
 // TASK 5
-//
+//Testing this function
 void History::insert(Transaction *p_new_trans)
 {
 }
@@ -168,7 +170,7 @@ double History::compute_cgl(unsigned int year) { return 0; }
 
 // print() Print the transaction history.
 //TASK 9
-//
+//Testing this function
 void History::print() {}
 
 // GIVEN

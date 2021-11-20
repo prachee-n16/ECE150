@@ -7,7 +7,8 @@
 
 #include "Transaction.hpp"
 
-class History {
+class History
+{
 public:
 	// Constructor
 	//
