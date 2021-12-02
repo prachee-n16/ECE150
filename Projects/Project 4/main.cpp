@@ -2,12 +2,15 @@
 #include "History.hpp"
 #include "Transaction.hpp"
 
-
 #ifndef MARMOSET_TESTING
 unsigned int Transaction::assigned_trans_id = 0;
-int main() {
+int main()
+{
   History trans_history{};
+  std::cout << "Starting history" << std::endl;
+
   trans_history.read_history();
+  std::cout << "Done reading history" << std::endl;
 
   std::cout << "[Starting history]:" << std::endl;
   trans_history.print();
