@@ -10,8 +10,8 @@
 // where determinant = ad - bc.
 // Matrix is not invertible if determinant is 0.
 // a, b, c and d are doubles: must be provided as user input to the program
-void findDeterminant();
-void findDeterminant()
+void findDeterminant(int determinant_int);
+void findDeterminant(int determinant_int)
 {
     double a, b, c, d{0.0};
     std::cout << "Enter matrix in form: \na b \nc d" << std::endl;
@@ -115,7 +115,7 @@ int main();
 
 int main()
 {
-    // findDeterminant();
+    findDeterminant(((((0)))));
     // matrixMultiplication();
     // checkSymbol();
 
