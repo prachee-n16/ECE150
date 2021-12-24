@@ -1,0 +1,188 @@
+Question 1:
+
+Suppose that p_m and p_n are two local variables of type int* that store the addresses of two
+dynamically allocated integers storing specific values. Two of the following four code blocks are valid,
+and two are not. For each block, determine whether the block would compile or not. If a block would
+compile, describe in one sentence what the block does. If a block would not compile, explain in one
+sentence why the code is invalid.
+
+A:
+Will compile.
+
+int k{ *p_m };
+*p_m = *p_n;
+*p_n = k;
+
+the value stores in pointer p_m and p_n are switched.
+
+B:
+Will compile.
+
+int *k{ p_m };
+p_m = p_n;
+p_n = k;
+
+the pointers p_m and p_n are switched.
+
+
+C:
+Will not compile.
+--> int k{p_m} is invalid because they are of different types (int and int*).
+
+D:
+Will not compile.
+--> int *k{*p_m} is invalid because *p_m will find the value at that address, so it's int. 
+However, k needs an address, not the value.
+
+Question 2.
+For line 2,
+bool swapped = true;
+
+For line 4,
+for (std::size_t i{0}; i < last; ++i)
+
+Switch line 7 and 8;
+array[i - 1] = array[i];
+array[i] = tmp;
+
+Change line 9 to, 
+i = -1;
+
+Question 3.
+An inversion in an array a is any pair of entries a[i] and a[k] where i < k but a[i] > a[k].
+Write the function definition for inversion_count(...), with the function declaration given below,
+which returns the number of inversions in the passed array
+
+int inversion_count (double a[], std::size_t cap);
+int inversion_count(double a[], std::size_t cap)
+{
+    int c = 0; // count number of inversions
+
+    for (int i = 0; i < cap, i++)
+    {
+        // i < k so set k to be 1 greater then i
+        for (int k = i + 1; k < cap; k++)
+        {
+            if (a[i] > a[k])
+            {
+                c += 1;
+            }
+        }
+    }
+
+    return c;
+}
+
+For questions 4 and 5 you will use a linked-list class as it was defined in the lectures.
+
+Question 4.
+class Node {
+ public:
+ Node *get_next() const;
+ void set_next(Node *next_node);
+ private:
+ Node *p_next_node_;
+}
+class Linked_list {
+ private:
+ Node *p_list_head_;
+}
+
+See above for a skeleton linked-list class. Your colleague implemented the following destructor. Explain
+the problem with this implementation in one sentence, and provide a proper implementation, without
+calling any other member functions.
+
+Linked_list::~Linked_list() {
+ while ( p_list_head_ != nullptr ) {
+ delete p_list_head_;
+ p_list_head_ = p_list_head_->get_next();
+ }
+}
+
+In this line, p_list_head_ = p_list_head_->get_next(); we call for get_next()  but our while loop doesn't check if this is nullptr or not.
+
+Without calling any member functions, we need to use the destructor for Node.
+Node::~Node() {
+    if (p_next_node_ != nullptr) {
+        delete p_next_node_;
+        p_next_node = nullptr;
+    }
+}
+
+Linked_list::~Linked_list() {
+    delete p_list_head_;
+    p_list_head_ = nullptr;
+}
+
+Question 5.
+
+void Linked_list::interleave( Linked_list &param_list );
+
+void Linked_list::interleave( Linked_list &param_list ) {
+    //param_list has head pointer to some list
+    Node *param_list_head = param_list;
+    //p_list_head_ has head pointer to second list
+    Node *p_list_head = this->p_list_head;
+
+    //Create next pointer variables
+    Node *param_list_next, *p_list_next;
+
+    
+    while ((param_list != nullptr) || (p_list_head_ != nullptr)) {
+        //first, get the list after the head pointer and save it
+        p_list_next = p_list_head_->get_next();
+        param_list_next = param_list_head->get_next();
+
+        //Merging logic
+        //let param list head set to p_list_head
+        param_list_head->set_next(p_list_head_); 
+        //p_list_head will set to the next in param_list_head
+        p_list_head_->set_next(param_list_next);
+
+        //update whats at head now
+        param_list_head = p_list_next;
+        p_list_head_ = param_list_next;
+    }
+    //since merged list is in param list return
+    //transfer to p_list_head_
+    p_list_head_ = param_list_head;
+    //set all dangling pointers to nullptr
+    p_list_next = nullptr;
+    param_list_head = nullptr;
+    param_list_next = nullptr;
+    param_list = nullptr;
+}
+
+Question 6. 
+Given an array of n values, we can define the width of an array as the largest difference between two
+entries in the array, so the maximum of std::abs(array[i] - array[j]) where i and j take values from 0 to n-1;
+
+This can be done with two for loops; however, there is a better approach that requires fewer checks, but
+still uses two for loops. There is an even better way using only one for loop going from 0 to n - 1 and no
+calls to the absolute value function.
+
+Logic:
+Largest different between two entries in the array should occur when we find the largest and smallest number for the array
+We won't need to use absolute value function if we happen to know which number is larger.
+
+
+double width( double array[], std::size_t cap);
+double width(double array[], std::size_t cap)
+{
+    double max, min, width{}; // store maximum, minimum number in array and width (result)
+
+    for (int i = 0; i < cap; i++)
+    {
+        if (array[i] > max)
+        {
+            max = array[i];
+        }
+        if (array[i] < min)
+        {
+            min = array[i];
+        }
+    }
+
+    width = max - min;
+    return width;
+}
